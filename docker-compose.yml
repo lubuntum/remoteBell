@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build: .
+    container_name: fastapi-audio-player
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./audio:/app/audio
+    devices:
+      - /dev/snd:/dev/snd  # <-- THIS IS CRUCIAL: Pass the sound device
+    group_add:
+      - "audio"            # <-- Add container user to host's audio group
+    environment:
+      - PYTHONUNBUFFERED=1
+      # Optionally, force ALSA if you have issues
+      # - ALSA_CARD=0
+    restart: unless-stopped

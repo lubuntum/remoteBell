@@ -4,18 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/index.css"  />
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>RemoteBell</title>
 </head>
 <body>
     <header class="container">
         <h3>RemoteBell</h3>
     </header>
     <main class="container">
+        <div class="flex-row flex-nowrap justify-center">
+            <button class="alarm" onclick="alarmTrigger(this)" data-filename="bomb.mp3">В здании бомба</button>
+            <button class="alarm" onclick="alarmTrigger(this)" data-filename="shooter.mp3">Стрелок в здании</button>
+        </div>
         <div class="flex-row">
             <div class="sounds-list" id="soundsList">
                 <p>Загружаем песни...</p>
             </div>
         </div>
+        <div class="flex-row">
+            <div class="days-list">
+                <div class="day">
+                    <h3>Понедельник</h3>
+                    <div class="shedules-list">
+                        <div class="shedule ripple-container">
+                            <p><b>14:15 Гимн России</b></p>
+                            <div class="fa-solid fa-trash"></div>
+                        </div>
+                    </div>
+                    <button>Добавить</button>
+                </div>
+                <div class="day">
+                    <h3>Вторник</h3>
+                    <div class="shedules-list">
+                        <div class="shedule ripple-container">
+                            <p><b>14:15 Гимн России</b></p>
+                            <div class="fa-solid fa-trash"></div>
+                        </div>
+                    </div>
+                    <button>Добавить</button>
+                </div>
+                <div class="day">
+                    <h3>Среда</h3>
+                    <div class="shedules-list">
+                        <div class="shedule ripple-container">
+                            <p><b>14:15 Гимн России</b></p>
+                            <div class="fa-solid fa-trash"></div>
+                        </div>
+                    </div>
+                    <button>Добавить</button>
+                </div>
+                <div class="day">
+                    <h3>Четверг</h3>
+                    <div class="shedules-list">
+                        <div class="shedule ripple-container">
+                            <p><b>14:15 Гимн России</b></p>
+                            <div class="fa-solid fa-trash"></div>
+                        </div>
+                    </div>
+                    <button>Добавить</button>
+                </div>
+                <div class="day">
+                    <h3>Пятница</h3>
+                    <div class="shedules-list">
+                        <div class="shedule ripple-container">
+                            <p><b>14:15 Гимн России</b></p>
+                            <div class="fa-solid fa-trash"></div>
+                        </div>
+                    </div>
+                    <button>Добавить</button>
+                </div>
+                <div class="day">
+                    <h3>Суббота</h3>
+                    <div class="shedules-list">
+                        <div class="shedule ripple-container">
+                            <p><b>14:15 Гимн России</b></p>
+                            <div class="fa-solid fa-trash"></div>
+                        </div>
+                    </div>
+                    <button>Добавить</button>
+                </div>
+                <div class="day">
+                    <h3>Воскресенье</h3>
+                    <div class="shedules-list">
+                        <div class="shedule ripple-container">
+                            <p><b>14:15 Гимн России</b></p>
+                            <div class="fa-solid fa-trash"></div>
+                        </div>
+                    </div>
+                    <button>Добавить</button>
+                </div>
+            </div>
+        </div>
+        
 
     </main>
     <script src="static/index.js"></script>

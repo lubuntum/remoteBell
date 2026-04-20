@@ -1,4 +1,4 @@
-API_URL = 'http://192.168.0.41:8000'
+const API_URL = 'http://localhost:8000'
 let currentlySelected = null
 const audioClick =  async function() {
     const filename = this.dataset.filename
@@ -22,7 +22,15 @@ const audioClick =  async function() {
     currentlySelected = this
     playOnServer(filename)
 }
-
+const alarmTrigger = async function(clickedItem) {
+    if (currentlySelected === clickedItem) {
+        await stopPlayOnServer()
+        currentlySelected = null
+        return
+    }
+    currentlySelected = clickedItem
+    playOnServer(clickedItem.dataset.filename)
+}
 const loadAudioFiles = async() => {
     try {
         const response = await fetch(`${API_URL}/api/audio-files`)

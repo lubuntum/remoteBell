@@ -1,0 +1,67 @@
+{
+  "schedules": [
+    {
+      "day": "Понедельник",
+      "dayIndex": 1,
+      "events": [
+        {
+          "time": "14:20",
+          "filepath": "/audio/monday_1415.mp3",
+          "duration": 30
+        },
+        {
+          "time": "14:25",
+          "filepath": "/audio/monday_1415.mp3",
+          "duration": 30
+        }
+      ]
+    },
+    {
+      "day": "Вторник",
+      "dayIndex": 2,
+      "events": [
+        {
+          "time": "09:00",
+          "filepath": "/audio/tuesday_0900.mp3",
+          "duration": 20
+        },
+        {
+          "time": "15:45",
+          "filepath": "/audio/tuesday_1545.mp3",
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "day": "Среда",
+      "dayIndex": 3,
+      "events": []
+    },
+    {
+      "day": "Четверг",
+      "dayIndex": 4,
+      "events": [
+        {
+          "time": "12:00",
+          "filepath": "/audio/thursday_1200.mp3",
+          "duration": 15
+        }
+      ]
+    },
+    {
+      "day": "Пятница",
+      "dayIndex": 5,
+      "events": []
+    },
+    {
+      "day": "Суббота",
+      "dayIndex": 6,
+      "events": []
+    },
+    {
+      "day": "Воскресенье",
+      "dayIndex": 7,
+      "events": []
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000'
+export const API_URL = 'http://localhost:8000'
 let currentlySelected = null
 const audioClick =  async function() {
     const filename = this.dataset.filename
@@ -31,39 +31,26 @@ const alarmTrigger = async function(clickedItem) {
     currentlySelected = clickedItem
     playOnServer(clickedItem.dataset.filename)
 }
-const loadAudioFiles = async() => {
+export const getAudioFilesHTML = async() => {
     try {
         const response = await fetch(`${API_URL}/api/audio-files`)
         const data = await response.json()
-        const soundsList = document.getElementById("soundsList")
-        soundsList.innerHTML = ""
 
         if (!data.files || data.files.length === 0) {
             soundsList.innerHTML = "<div>Нет аудо файлов</div>"
         }
-        data.files.forEach(file => {
-            const soundDiv = document.createElement('div')
-            soundDiv.className = "sound"
-            const displayname = file.replace(".mp3", '').replace(/_/g, ' ')
-            soundDiv.dataset.name = displayname 
-            soundDiv.dataset.filename = file 
-            
-            soundDiv.innerHTML = `
-                <div class="sound-info"> 
-                    <span class="sound-title">${displayname} </span>
-                    <span class="sound-duration">Загрузка времени </span>
+        const soundsHTML = data.files.map(file => {
+            const displayName = file.replace(".mp3", '').replace(/_/g, ' ');
+            return `
+                <div class="sound" data-name="${displayName}" data-filename="${file}">
+                    <div class="sound-info">
+                        <span class="sound-title">${displayName}</span>
+                    </div>
+                    <audio controls src="${API_URL}/api/audio-files/${file}"></audio>
                 </div>
-                <audio controls src="/audio/${file}"></audio>
-            `
-            soundDiv.addEventListener('click', audioClick)
-
-            soundsList.appendChild(soundDiv)
-            const audio = soundDiv.querySelector('audio')
-            audio.addEventListener("loadedmetadata", () => {
-            const duration = formatDuration(audio.duration)
-            soundDiv.querySelector('.sound-duration').textContent = duration
-        })
-        })
+            `;
+        }).join('');
+        return `<div class="sounds-list"> ${soundsHTML} </div>`
         
     } catch(err) {
         console.error(err)
@@ -106,7 +93,7 @@ const playOnServer = async (filename) => {
         showNotification(`Ошибка при соденинении с сервером:`, 'error')
     }
 }
-const showNotification = (message, type = 'info') => {
+export const showNotification = (message, type = 'info') => {
     const notification = document.createElement('div')
     notification.className = `notification ${type}`
     notification.textContent = message
@@ -127,4 +114,4 @@ const showNotification = (message, type = 'info') => {
         notification.remove()
     }, 3000)
 }
-document.addEventListener("DOMContentLoaded", loadAudioFiles)
+//document.addEventListener("DOMContentLoaded", loadAudioFiles)

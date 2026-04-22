@@ -1,7 +1,5 @@
 import { getAudioFilesHTML } from "../index.js"
 
-
-
 window.onclick = function(event) {
     const modal = document.getElementById("modal")
     if (event.target === modal) {
@@ -18,9 +16,12 @@ export const getModalHtml = async (day) => {
                 </div>
                 <div class="modal-body">
                     <form id="add-schedule">
-                        <input type="text" placeholder="ЧЧ:ММ">
+                        <div class="flex-col"> 
+                            <input id="time" type="text" placeholder="ЧЧ:ММ">
+                            <input id="duration" type="number" placeholder="Длительность сек.">
+                        </div>
                         ${await getAudioFilesHTML()}
-                        <button type="submit">Добавить</button>
+                        <button type="submit" id="submit-btn">Добавить</button>
                     </form>
                 </div>
             </div>

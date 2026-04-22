@@ -1,5 +1,6 @@
 import { API_URL, showNotification } from "./index.js"
 import { getModalHtml } from "./modal/modal.js"
+import { isDigit, validateTime } from "./utility.js"
 
 const loadSchedules = async () => {
     try {
@@ -20,13 +21,13 @@ const generateSchedules = (schedules) => {
 
         const eventsHTML = day.events.map(event => {
             return `<div class="schedule">
-                        <p><b>${event.time} - ${event.filepath || event.file}</b></p>
+                        <p><b>Время ${event.time}, ${event.filepath.split("/").pop()}, ${event?.duration} сек.</b></p>
                         <i class="fa-solid fa-trash" data-day="${day.day}" data-event-time="${event.time}"></i>
                     </div>`;
         }).join(''); 
         
         return `<div class="day">
-                    <h3>${day.day}</h3>
+                    <h3>${day.dayRu}</h3>
                     <div class="schedules-list">
                         ${eventsHTML}
                     </div>
@@ -43,14 +44,79 @@ const generateSchedules = (schedules) => {
             deleteScheduleItem(day, eventTime)
         })
     })
+    
     document.querySelectorAll(".add-btn").forEach(btn => {
         btn.addEventListener("click", async (e)=> {
             const day = btn.dataset.day
-            console.log(`Add for day: ${day}`)
             await document.body.insertAdjacentHTML('beforeend', await getModalHtml(day))
-            
+            const modal = document.querySelector(".modal")
+            console.log(modal)
+            modal.querySelectorAll(".sound").forEach(item => {
+                item.addEventListener("click", async (e) => {
+                    e.stopPropagation()
+                    console.log(`${item.dataset.filename}`)
+                    modal.querySelectorAll(".sound").forEach(s => s.classList.remove("active"))
+                    item.classList.add("active")
+                })
+            })
+            modal.addEventListener('click', e => {
+                if (e.target === modal)
+                    modal.remove()
+            })
+            const submitBtn = modal.querySelector('button[type="submit"]');
+            submitBtn.addEventListener("click", async (e) => {
+                e.preventDefault(); // This MUST be first
+                e.stopPropagation(); // Add this too
+                
+                const activeSound = modal.querySelector(".sound.active");
+                if (!activeSound) {
+                    showNotification("Выберите аудиофайл", "error")
+                    return false
+                }
+                const filename = activeSound.dataset.filename;
+                const time = modal.querySelector("#time").value
+                const duration = modal.querySelector("#duration").value
+                if (!filename || !time || !duration) {
+                    showNotification("Заполните все поля", "error")
+                    return
+                }
+                if (!validateTime(time)) {
+                    showNotification("Введите время в правильном формате", "error")
+                    return
+                }
+                if (!isDigit(duration)) {
+                    showNotification("Длительность должна быть числом", "error")
+                    return
+                }
+                await addScheduleItem(day, time, duration, filename)
+                modal.remove();
+                renderSchedules()
+                return false; // Extra prevention
+            });
         })
     })
+
+    
+}
+const addScheduleItem = async(day, time, duration, filepath) => {
+    try {
+        const response = await fetch(`${API_URL}/api/schedules/days/events`, {
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                day: day,
+                time: time,
+                duration: duration,
+                filepath: filepath
+            })
+        })
+        showNotification(`Добавлен звонок на ${day} - ${time}`)
+    } catch(err) {
+        console.error("Ошибка при отправке", err)
+        showNotification("Возникла ошибка при отправке", "error")
+    }
 }
 const deleteScheduleItem = async (day, time) => {
     console.log(`Deleting ${time} from ${day}`)

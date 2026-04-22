@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:8000'
+export const API_URL = 'http://192.168.155.75:8000'
 let currentlySelected = null
 const audioClick =  async function() {
     const filename = this.dataset.filename
@@ -22,7 +22,8 @@ const audioClick =  async function() {
     currentlySelected = this
     playOnServer(filename)
 }
-const alarmTrigger = async function(clickedItem) {
+//global funcion for inline use
+window.alarmTrigger = async function(clickedItem) {
     if (currentlySelected === clickedItem) {
         await stopPlayOnServer()
         currentlySelected = null
@@ -46,7 +47,7 @@ export const getAudioFilesHTML = async() => {
                     <div class="sound-info">
                         <span class="sound-title">${displayName}</span>
                     </div>
-                    <audio controls src="${API_URL}/api/audio-files/${file}"></audio>
+                    <audio controls src="${API_URL}/audio/${file}"></audio>
                 </div>
             `;
         }).join('');
@@ -57,11 +58,7 @@ export const getAudioFilesHTML = async() => {
         document.getElementById("soundsList").innerHTML = `<div class="error"> Ошибка при загрузке песен ${err} </div>`
     }
 }
-const formatDuration = (totalSeconds) => {
-    const minutes = Math.floor(totalSeconds / 60)
-    const seconds = Math.floor(totalSeconds % 60)
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`
-}
+
 const stopPlayOnServer = async () => {
     try {
         const response = await fetch(`${API_URL}/api/stop-audio`, {

@@ -1,8 +1,9 @@
 {
   "schedules": [
     {
-      "day": "Понедельник",
+      "day": "monday",
       "dayIndex": 1,
+      "dayRu": "Понедельник",
       "events": [
         {
           "time": "14:20",
@@ -13,54 +14,80 @@
           "time": "14:25",
           "filepath": "/audio/monday_1415.mp3",
           "duration": 30
-        }
-      ]
-    },
-    {
-      "day": "Вторник",
-      "dayIndex": 2,
-      "events": [
-        {
-          "time": "09:00",
-          "filepath": "/audio/tuesday_0900.mp3",
-          "duration": 20
         },
         {
-          "time": "15:45",
-          "filepath": "/audio/tuesday_1545.mp3",
-          "duration": 60
+          "time": "15:05",
+          "filepath": "easy_vide_california.mp3",
+          "duration": 25
         }
       ]
     },
     {
-      "day": "Среда",
-      "dayIndex": 3,
-      "events": []
-    },
-    {
-      "day": "Четверг",
-      "dayIndex": 4,
+      "day": "tuesday",
+      "dayIndex": 2,
+      "dayRu": "Вторник",
       "events": [
         {
-          "time": "12:00",
-          "filepath": "/audio/thursday_1200.mp3",
-          "duration": 15
+          "time": "14:51",
+          "filepath": "/audio/easy_vide_california.mp3",
+          "duration": 60
+        },
+        {
+          "time": "14:52",
+          "filepath": "/audio/easy_vide_california.mp3",
+          "duration": 5
+        },
+        {
+          "time": "14:53",
+          "filepath": "easy_vide_california.mp3",
+          "duration": 10
         }
       ]
     },
     {
-      "day": "Пятница",
+      "day": "wednesday",
+      "dayIndex": 3,
+      "dayRu": "Среда",
+      "events": [
+        {
+          "time": "14:59",
+          "filepath": "easy_vide_california.mp3",
+          "duration": 5
+        },
+        {
+          "time": "15:00",
+          "filepath": "guitar_vibe.mp3",
+          "duration": 5
+        },
+        {
+          "time": "15:01",
+          "filepath": "easy_vide_california.mp3",
+          "duration": 30
+        }
+      ]
+    },
+    {
+      "day": "thursday",
+      "dayIndex": 4,
+      "dayRu": "Четверг",
+      "events": []
+    },
+    {
+      "day": "friday",
       "dayIndex": 5,
+      "dayRu": "Пятница",
       "events": []
     },
     {
-      "day": "Суббота",
+      "day": "saturday",
       "dayIndex": 6,
+      "dayRu": "Суббота",
       "events": []
     },
     {
-      "day": "Воскресенье",
+      "day": "sunday",
       "dayIndex": 7,
+      "dayRu": "Воскресенье",
       "events": []
     }
   ]

@@ -24,7 +24,6 @@ class ScheduleService:
         while True:
             await self.check_current_time()
             await asyncio.sleep(CHECK_INTERVAL_SECONDS)
-            logger.info("Wait another minute")
 
     async def check_current_time(self):
         now = datetime.now()

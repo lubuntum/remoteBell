@@ -41,6 +41,11 @@ body {
   gap: 1rem;
   flex-wrap: wrap;
 }
+.flex-col {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
 .flex-nowrap {
   flex-wrap: nowrap;
 }
@@ -91,6 +96,7 @@ body {
   height: 55%;
   width: 100%;
   overflow-y: auto;
+  scrollbar-width: thin;
 }
 .schedule {
   display: flex;

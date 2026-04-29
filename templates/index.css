@@ -64,7 +64,8 @@ body {
   scrollbar-width: thin;
 }
 .sounds-list {
-  max-height: 500px;
+  padding-bottom: 20px;
+  max-height: 60vh;
   scrollbar-width: none;
 }
 .sound,
@@ -93,7 +94,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: 55%;
+  height: 75%;
   width: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
